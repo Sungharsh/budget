@@ -15,6 +15,8 @@ const AllExpensesList: React.FC = () => {
     >
       <ExpenseInput label="Rent" contextKey="MortgageOrRent" />
       <ExpenseInput label="Food" contextKey="FoodAndGroceries" />
+      <ExpenseInput label="Utilities" contextKey="Utilities" />
+      <ExpenseInput label="HomeInsurance" contextKey="HomeInsurance" />
     </Box>
   )
 }

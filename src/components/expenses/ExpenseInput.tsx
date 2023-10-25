@@ -7,15 +7,45 @@ import { useExpenses } from '../context/ExpensesContext'
 
 interface ExpenseInputProps {
   label: string
-  contextKey: 'MortgageOrRent' | 'FoodAndGroceries'
+  contextKey: 'MortgageOrRent' | 'FoodAndGroceries' | 'Utilities' | 'HomeInsurance'
 }
 
 const ExpenseInput: React.FC<ExpenseInputProps> = ({ label, contextKey }) => {
-  const { setMortgageOrRent, setFoodAndGroceries, mortgageOrRent, foodAndGroceries } = useExpenses()
+  const {
+    setMortgageOrRent,
+    setFoodAndGroceries,
+    mortgageOrRent,
+    foodAndGroceries,
+    utilities,
+    setUtilities,
+    homeInsurance,
+    setHomeInsurance,
+  } = useExpenses()
 
-  const setExpenses = contextKey === 'MortgageOrRent' ? setMortgageOrRent : setFoodAndGroceries
-  const expensesValue = contextKey === 'MortgageOrRent' ? mortgageOrRent : foodAndGroceries
-  const typeOfExpense = contextKey === 'MortgageOrRent' ? 'Rent' : 'Food'
+  const setExpenses =
+    contextKey === 'MortgageOrRent'
+      ? setMortgageOrRent
+      : contextKey === 'FoodAndGroceries'
+      ? setFoodAndGroceries
+      : contextKey === 'Utilities'
+      ? setUtilities
+      : setHomeInsurance
+  const expensesValue =
+    contextKey === 'MortgageOrRent'
+      ? mortgageOrRent
+      : contextKey === 'FoodAndGroceries'
+      ? foodAndGroceries
+      : contextKey === 'Utilities'
+      ? utilities
+      : homeInsurance
+  const typeOfExpense =
+    contextKey === 'MortgageOrRent'
+      ? 'Rent'
+      : contextKey === 'FoodAndGroceries'
+      ? 'Food'
+      : contextKey === 'Utilities'
+      ? 'Utilities'
+      : 'HomeInsurance'
 
   return (
     <Box
