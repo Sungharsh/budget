@@ -36,5 +36,8 @@ describe('incomeInput component', () => {
     expect(incomeInput).toHaveValue(1000)
     expect(addButton).toBeEnabled()
     expect(nextButton).toBeEnabled()
+
+    fireEvent.click(nextButton)
+    expect(updateFlipPageMock).toHaveBeenCalled()
   })
 })
