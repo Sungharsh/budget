@@ -12,7 +12,7 @@ import { useIncome } from '../context/IncomeContext'
 interface IncomeProps {
   updateFlipPage: () => void
 }
-const Income: React.FC<IncomeProps> = ({ updateFlipPage }) => {
+const IncomeInput: React.FC<IncomeProps> = ({ updateFlipPage }) => {
   const [value, setValue] = useState<string | number>('')
   const { updateIncome } = useIncome()
   const hasValue = value !== ''
@@ -90,4 +90,4 @@ const Income: React.FC<IncomeProps> = ({ updateFlipPage }) => {
   )
 }
 
-export default Income
+export default IncomeInput
