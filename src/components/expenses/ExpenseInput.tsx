@@ -5,12 +5,12 @@ import React from 'react'
 import SelectFrequency from '../../utils/selectFrequency'
 import { useExpenses } from '../context/ExpensesContext'
 
-interface ExpenseInputProps {
+export interface ExpensesInputProps {
   label: string
   contextKey: 'MortgageOrRent' | 'FoodAndGroceries' | 'Utilities' | 'HomeInsurance'
 }
 
-const ExpenseInput: React.FC<ExpenseInputProps> = ({ label, contextKey }) => {
+const ExpensesInput: React.FC<ExpensesInputProps> = ({ label, contextKey }) => {
   const {
     setMortgageOrRent,
     setFoodAndGroceries,
@@ -71,4 +71,4 @@ const ExpenseInput: React.FC<ExpenseInputProps> = ({ label, contextKey }) => {
   )
 }
 
-export default ExpenseInput
+export default ExpensesInput
