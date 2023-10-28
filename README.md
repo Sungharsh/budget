@@ -1,8 +1,6 @@
 ## Sungharsh-Jarathi - <a href="https://sungharsh.github.io/" target="_blank">sungharsh.github.com </a>
 
-# 🚀 Budget Calculator App
-
-## This project uses:
+## 🚀 Budget Calculator App
 
 ## 💎 Libraries used
 
