@@ -7,8 +7,12 @@ interface Props {
 interface ExpensesContextType {
   mortgageOrRent: number
   foodAndGroceries: number
+  utilities: number
+  homeInsurance: number
   setMortgageOrRent: React.Dispatch<React.SetStateAction<number>>
   setFoodAndGroceries: React.Dispatch<React.SetStateAction<number>>
+  setUtilities: React.Dispatch<React.SetStateAction<number>>
+  setHomeInsurance: React.Dispatch<React.SetStateAction<number>>
 }
 
 const ExpensesContext = createContext<ExpensesContextType | undefined>(undefined)
@@ -16,9 +20,22 @@ const ExpensesContext = createContext<ExpensesContextType | undefined>(undefined
 export const ExpensesContextProvider: React.FC<Props> = ({ children }) => {
   const [mortgageOrRent, setMortgageOrRent] = useState(0)
   const [foodAndGroceries, setFoodAndGroceries] = useState(0)
+  const [utilities, setUtilities] = useState(0)
+  const [homeInsurance, setHomeInsurance] = useState(0)
 
   return (
-    <ExpensesContext.Provider value={{ mortgageOrRent, foodAndGroceries, setMortgageOrRent, setFoodAndGroceries }}>
+    <ExpensesContext.Provider
+      value={{
+        mortgageOrRent,
+        foodAndGroceries,
+        setMortgageOrRent,
+        setFoodAndGroceries,
+        utilities,
+        setUtilities,
+        homeInsurance,
+        setHomeInsurance,
+      }}
+    >
       {children}
     </ExpensesContext.Provider>
   )

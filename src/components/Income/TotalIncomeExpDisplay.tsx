@@ -6,9 +6,8 @@ import { useIncome } from '../context/IncomeContext'
 
 const TotalIncomeExpDisplay: React.FC = () => {
   const { income } = useIncome()
-  const { mortgageOrRent, foodAndGroceries } = useExpenses()
-  const totalExpenses = mortgageOrRent + foodAndGroceries
-  console.log('total', totalExpenses)
+  const { mortgageOrRent, foodAndGroceries, utilities, homeInsurance } = useExpenses()
+  const totalExpenses = mortgageOrRent + foodAndGroceries + utilities + homeInsurance
   return (
     <>
       <Box
