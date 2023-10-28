@@ -1,4 +1,4 @@
-# Sungharsh-Jarathi - <a href="https://sungharsh.github.io/" target="_blank">sungharsh.github.com </a>
+## Sungharsh-Jarathi - <a href="https://sungharsh.github.io/" target="_blank">sungharsh.github.com </a>
 
 # 🚀 Budget Calculator App
 
