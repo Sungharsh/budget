@@ -1,6 +1,6 @@
+import { Alert } from '@mui/material'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
-import Divider from '@mui/material/Divider'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import { useState } from 'react'
@@ -14,18 +14,41 @@ interface IncomeProps {
 }
 const IncomeInput: React.FC<IncomeProps> = ({ updateFlipPage }) => {
   const [value, setValue] = useState<string | number>('')
+  const [showAlert, setShowAlert] = useState<boolean>(true)
   const { updateIncome } = useIncome()
   const hasValue = value !== ''
 
+  const haldleFlipPage = () => {
+    if (value) {
+      updateFlipPage()
+    }
+  }
+
   return (
     <>
-      <Typography component="h2" variant="h6" sx={{ margin: '20px' }} data-testid="custom-element">
+      <Typography
+        component="h2"
+        variant="h6"
+        sx={{ marginTop: '20px', fontWeight: 900, fontSize: '22px' }}
+        data-testid="custom-element"
+      >
         Your Income
       </Typography>
-      <Typography component="p" sx={{ margin: '20px' }}>
+      <Typography component="p" sx={{ fontSize: '17px' }}>
         Please tell your income amount and how often you get it
       </Typography>
-      <Divider />
+      {/* <Typography component="p" sx={{ margin: '20px', border: 1, borderColor: '#9edfdf', borderRadius: 1, p: 1 }}>
+        Amounts will be rounded for you
+      </Typography> */}
+      {showAlert && (
+        <Alert
+          onClose={() => setShowAlert(false)}
+          severity="info"
+          sx={{ margin: '20px', border: 1, borderColor: '#9edfdf', borderRadius: 1, p: 1 }}
+        >
+          Amount will be rounded for you
+        </Alert>
+      )}
       <Box
         sx={{
           display: 'grid',
@@ -68,11 +91,10 @@ const IncomeInput: React.FC<IncomeProps> = ({ updateFlipPage }) => {
           mr: 6,
         }}
       >
-        <Button disabled={!hasValue} variant="contained" size="large" sx={{ pr: 2, pl: 2 }}>
+        <Button disabled={!hasValue} variant="contained" size="large" sx={{ pr: 2, pl: 2, mr: 4 }}>
           Add another income
         </Button>
         <Button
-          disabled={!hasValue}
           type="submit"
           variant="contained"
           size="large"
@@ -80,7 +102,7 @@ const IncomeInput: React.FC<IncomeProps> = ({ updateFlipPage }) => {
           onClick={() => {
             updateIncome(Number(value))
             setValue('')
-            updateFlipPage()
+            haldleFlipPage()
           }}
         >
           Next

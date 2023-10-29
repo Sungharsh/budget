@@ -65,6 +65,7 @@ const ExpensesInput: React.FC<ExpensesInputProps> = ({ label, contextKey }) => {
         label={label}
         value={expensesValue}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setExpenses(parseFloat(e.target.value) || 0)}
+        sx={{ mr: 2 }}
       />
       <SelectFrequency />
     </Box>

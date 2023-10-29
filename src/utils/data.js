@@ -4,43 +4,43 @@ const income = {
 }
 
 const expenses = {
-  householdExpenses: {
+  Household: {
     mortgageOrRent: 0,
     foodAndGroceries: 0,
     utilities: 0,
     homeInsurance: 0,
   },
-  family: {
+  Family: {
     childCareAndEducation: 0,
     holidays: 0,
     pets: 0,
     gifts: 0,
   },
-  finance: {
+  Finance: {
     creditCardPayments: 0,
     loanRepayments: 0,
     carFinancePayments: 0,
     otherLendingRepayments: 0,
   },
-  healthAndWellbeing: {
+  HealthAndWellbeing: {
     gym: 0,
     healthInsurance: 0,
     lifeInsurance: 0,
     treatments: 0,
   },
-  transport: {
+  Transport: {
     carInsurance: 0,
     carMaintenance: 0,
     publicTransport: 0,
     parking: 0,
   },
-  entertainment: {
+  Entertainment: {
     internetTVandMobile: 0,
     subscriptions: 0,
     hobbies: 0,
     outingsGoingOut: 0,
   },
-  other: {
+  Other: {
     anyOtherExpenses: 0,
   },
 }
