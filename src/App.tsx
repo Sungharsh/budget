@@ -31,7 +31,7 @@ const App: React.FC = () => {
             <TotalIncomeExpDisplay />
             {flipPage ? <IncomeInput updateFlipPage={updateFlipPage} /> : <AllExpensesList />}
           </Container>
-          <Divider />
+          <Divider sx={{ mt: 6 }} />
         </ExpensesContextProvider>
       </IncomeProvider>
     </>
