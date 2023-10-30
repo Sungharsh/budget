@@ -7,19 +7,35 @@ import { useExpenses } from '../context/ExpensesContext'
 
 export interface ExpensesInputProps {
   label: string
-  contextKey: 'MortgageOrRent' | 'FoodAndGroceries' | 'Utilities' | 'HomeInsurance'
+  contextKey:
+    | 'MortgageOrRent'
+    | 'FoodAndGroceries'
+    | 'Utilities'
+    | 'HomeInsurance'
+    | 'ChildcareAndEducation'
+    | 'Holidays'
+    | 'Pets'
+    | 'Gifts'
 }
 
 const ExpensesInput: React.FC<ExpensesInputProps> = ({ label, contextKey }) => {
   const {
     setMortgageOrRent,
     setFoodAndGroceries,
+    setUtilities,
+    setHomeInsurance,
+    setChildcareAndEducation,
+    setHolidays,
+    setPets,
+    setGifts,
     mortgageOrRent,
     foodAndGroceries,
     utilities,
-    setUtilities,
     homeInsurance,
-    setHomeInsurance,
+    childcareAndEducation,
+    holidays,
+    pets,
+    gifts,
   } = useExpenses()
 
   const setExpenses =
@@ -29,7 +45,16 @@ const ExpensesInput: React.FC<ExpensesInputProps> = ({ label, contextKey }) => {
       ? setFoodAndGroceries
       : contextKey === 'Utilities'
       ? setUtilities
-      : setHomeInsurance
+      : contextKey === 'HomeInsurance'
+      ? setHomeInsurance
+      : contextKey === 'ChildcareAndEducation'
+      ? setChildcareAndEducation
+      : contextKey === 'Holidays'
+      ? setHolidays
+      : contextKey === 'Pets'
+      ? setPets
+      : setGifts
+
   const expensesValue =
     contextKey === 'MortgageOrRent'
       ? mortgageOrRent
@@ -37,15 +62,31 @@ const ExpensesInput: React.FC<ExpensesInputProps> = ({ label, contextKey }) => {
       ? foodAndGroceries
       : contextKey === 'Utilities'
       ? utilities
-      : homeInsurance
+      : contextKey === 'HomeInsurance'
+      ? homeInsurance
+      : contextKey === 'ChildcareAndEducation'
+      ? childcareAndEducation
+      : contextKey === 'Gifts'
+      ? gifts
+      : contextKey === 'Holidays'
+      ? holidays
+      : pets
   const typeOfExpense =
     contextKey === 'MortgageOrRent'
-      ? 'Rent'
+      ? 'Mortgage or Rent'
       : contextKey === 'FoodAndGroceries'
-      ? 'Food'
+      ? 'Food and groceries'
       : contextKey === 'Utilities'
       ? 'Utilities'
-      : 'HomeInsurance'
+      : contextKey === 'HomeInsurance'
+      ? 'Home Insurance'
+      : contextKey === 'ChildcareAndEducation'
+      ? 'Child care & education'
+      : contextKey === 'Holidays'
+      ? 'Holidays'
+      : contextKey === 'Pets'
+      ? 'Pets'
+      : 'Gifts'
 
   return (
     <Box

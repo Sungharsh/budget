@@ -6,8 +6,10 @@ import { useIncome } from '../context/IncomeContext'
 
 const TotalIncomeExpDisplay: React.FC = () => {
   const { income } = useIncome()
-  const { mortgageOrRent, foodAndGroceries, utilities, homeInsurance } = useExpenses()
-  const totalExpenses = mortgageOrRent + foodAndGroceries + utilities + homeInsurance
+  const { mortgageOrRent, foodAndGroceries, utilities, homeInsurance, childcareAndEducation, holidays, pets, gifts } =
+    useExpenses()
+  const totalExpenses =
+    mortgageOrRent + foodAndGroceries + utilities + homeInsurance + childcareAndEducation + holidays + pets + gifts
   return (
     <>
       <Box
@@ -18,14 +20,14 @@ const TotalIncomeExpDisplay: React.FC = () => {
           backgroundColor: 'teal',
           textAlign: 'center',
           mt: 3,
-          p: 4,
+          p: 2,
         }}
       >
         <Typography variant="h6" component="h2" sx={{ color: '#fff' }}>
-          INCOME: {income.amount}
+          INCOME: {Math.floor(income.amount)}
         </Typography>
         <Typography variant="h6" component="h2" sx={{ color: '#fff' }}>
-          EXPENSES: {totalExpenses}
+          EXPENSES: {Math.floor(totalExpenses)}
         </Typography>
       </Box>
     </>
