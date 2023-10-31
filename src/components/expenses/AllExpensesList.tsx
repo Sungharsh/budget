@@ -4,6 +4,7 @@ import AccordionDetails from '@mui/material/AccordionDetails'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import Alert from '@mui/material/Alert'
 import Box from '@mui/material/Box'
+import { useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import React, { useState } from 'react'
 
@@ -17,6 +18,8 @@ const AllExpensesList: React.FC = () => {
   const householdExpense = mortgageOrRent + foodAndGroceries + utilities + homeInsurance
   const familyExpenses = childcareAndEducation + holidays + pets + gifts
 
+  const theme = useTheme()
+
   return (
     <Box
       sx={{
@@ -25,10 +28,10 @@ const AllExpensesList: React.FC = () => {
         mt: 4,
       }}
     >
-      <Typography component="h2" variant="h6" sx={{ fontWeight: 900, fontSize: '22px' }} data-testid="custom-element">
+      <Typography variant="h2" data-testid="custom-element">
         Your Expenses
       </Typography>
-      <Typography component="p" sx={{ fontSize: '17px', mb: 2 }}>
+      <Typography component="p" sx={{ mb: 2 }}>
         Please fill in your expenses
       </Typography>
 
@@ -44,9 +47,9 @@ const AllExpensesList: React.FC = () => {
 
       <Accordion sx={{ boxShadow: 3, marginBottom: '6px', p: 1 }}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
-          <Typography sx={{ fontWeight: 900, fontSize: '22px' }}>Household</Typography>
-          <Box sx={{ fontSize: '22px', margin: '0 0 0 auto', color: '#008080', fontWeight: 900 }}>
-            {Math.floor(householdExpense)}
+          <Typography variant="h3">Household</Typography>
+          <Box sx={{ margin: '0 0 0 auto', color: theme.palette.primary.main }}>
+            <Typography variant="h3">{Math.floor(householdExpense)}</Typography>
           </Box>
         </AccordionSummary>
         <AccordionDetails>
@@ -56,10 +59,13 @@ const AllExpensesList: React.FC = () => {
           <ExpenseInput label="HomeInsurance" contextKey="HomeInsurance" />
         </AccordionDetails>
       </Accordion>
+
       <Accordion sx={{ boxShadow: 3, marginBottom: '6px', p: 1 }}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
-          <Typography sx={{ fontWeight: 900, fontSize: '22px' }}>Family</Typography>
-          <Box sx={{ fontSize: '22px', margin: '0 0 0 auto', color: '#008080', fontWeight: 900 }}>{familyExpenses}</Box>
+          <Typography variant="h3">Family</Typography>
+          <Box sx={{ margin: '0 0 0 auto', color: theme.palette.primary.main }}>
+            <Typography variant="h3">{Math.floor(familyExpenses)}</Typography>
+          </Box>
         </AccordionSummary>
         <AccordionDetails>
           <ExpenseInput label="ChildCare" contextKey="ChildcareAndEducation" />

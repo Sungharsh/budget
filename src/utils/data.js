@@ -1,4 +1,4 @@
-//state model
+//App state model
 const income = {
   amount: 0,
 }

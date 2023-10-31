@@ -2,12 +2,14 @@ import { Box } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Avatar from '@mui/material/Avatar'
 import Container from '@mui/material/Container'
+import { useTheme } from '@mui/material/styles'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 
 const MenuBar: React.FC = () => {
+  const theme = useTheme()
   return (
-    <AppBar position="static" sx={{ backgroundColor: '#5b5b5b' }}>
+    <AppBar position="static" sx={{ backgroundColor: theme.palette.info.main }}>
       <Container maxWidth="md" sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(2, 1fr)', m: 'auto', p: 4 }}>
         <Toolbar variant="dense" disableGutters>
           <Avatar sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }} />

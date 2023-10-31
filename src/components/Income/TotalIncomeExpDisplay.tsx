@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box'
+import { useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 
 import { useExpenses } from '../context/ExpensesContext'
@@ -10,6 +11,8 @@ const TotalIncomeExpDisplay: React.FC = () => {
     useExpenses()
   const totalExpenses =
     mortgageOrRent + foodAndGroceries + utilities + homeInsurance + childcareAndEducation + holidays + pets + gifts
+
+  const theme = useTheme()
   return (
     <>
       <Box
@@ -17,16 +20,16 @@ const TotalIncomeExpDisplay: React.FC = () => {
           display: 'grid',
           gap: 1,
           gridTemplateColumns: 'repeat(2, 1fr)',
-          backgroundColor: 'teal',
+          backgroundColor: theme.palette.primary.main,
           textAlign: 'center',
           mt: 3,
           p: 2,
         }}
       >
-        <Typography variant="h6" component="h2" sx={{ color: '#fff' }}>
+        <Typography variant="h6" component="h2" sx={{ color: theme.palette.secondary.main }}>
           INCOME: {Math.floor(income.amount)}
         </Typography>
-        <Typography variant="h6" component="h2" sx={{ color: '#fff' }}>
+        <Typography variant="h6" component="h2" sx={{ color: theme.palette.secondary.main }}>
           EXPENSES: {Math.floor(totalExpenses)}
         </Typography>
       </Box>
