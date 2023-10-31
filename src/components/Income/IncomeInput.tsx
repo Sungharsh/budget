@@ -26,20 +26,10 @@ const IncomeInput: React.FC<IncomeProps> = ({ updateFlipPage }) => {
 
   return (
     <>
-      <Typography
-        component="h2"
-        variant="h6"
-        sx={{ marginTop: '20px', fontWeight: 900, fontSize: '22px' }}
-        data-testid="custom-element"
-      >
+      <Typography variant="h2" sx={{ marginTop: '20px' }} data-testid="custom-element">
         Your Income
       </Typography>
-      <Typography component="p" sx={{ fontSize: '17px' }}>
-        Please tell your income amount and how often you get it
-      </Typography>
-      {/* <Typography component="p" sx={{ margin: '20px', border: 1, borderColor: '#9edfdf', borderRadius: 1, p: 1 }}>
-        Amounts will be rounded for you
-      </Typography> */}
+      <Typography>Please tell your income amount and how often you get it</Typography>
       {showAlert && (
         <Alert
           onClose={() => setShowAlert(false)}
@@ -57,7 +47,7 @@ const IncomeInput: React.FC<IncomeProps> = ({ updateFlipPage }) => {
           textAlign: 'center',
         }}
       >
-        <Typography sx={{ color: '#000', fontWeight: 'bold', pt: 5 }}>Salary: </Typography>
+        <Typography sx={{ fontWeight: 'bold', pt: 5 }}>Salary: </Typography>
         <Box
           component="form"
           sx={{

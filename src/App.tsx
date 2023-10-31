@@ -1,5 +1,3 @@
-import './App.css'
-
 import Container from '@mui/material/Container'
 import Divider from '@mui/material/Divider'
 import React, { useState } from 'react'

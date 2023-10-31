@@ -31,7 +31,6 @@ describe('incomeInput component', () => {
     expect(addButton).toBeDisabled()
     expect(nextButton).toBeEnabled()
 
-    // Simulate user input
     fireEvent.change(incomeInput, { target: { value: '1000' } })
     expect(incomeInput).toHaveValue(1000)
     expect(addButton).toBeEnabled()
