@@ -12,6 +12,7 @@
 - eslint,
 - Prettier,
 - simple-import-sort
+- use-immer
 
 ## 🔥 Motivation
 

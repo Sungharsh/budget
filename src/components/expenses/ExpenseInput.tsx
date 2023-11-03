@@ -3,88 +3,63 @@ import TextField from '@mui/material/TextField'
 import React from 'react'
 
 import SelectFrequency from '../../utils/selectFrequency'
-import { useExpenses } from '../context/ExpensesContext'
+import { useIncomeExpenses } from '../context/IncomeExpensesContext'
 
 export interface ExpensesInputProps {
   label: string
   contextKey:
-    | 'MortgageOrRent'
-    | 'FoodAndGroceries'
-    | 'Utilities'
-    | 'HomeInsurance'
-    | 'ChildcareAndEducation'
-    | 'Holidays'
-    | 'Pets'
-    | 'Gifts'
+    | 'MORTGAGE_OR_RENT'
+    | 'FOOD_GROCERIES'
+    | 'UTILITIES'
+    | 'HOME_INSURANCE'
+    | 'CHILD_CARE_EDUCATION'
+    | 'HOLIDAYS'
+    | 'PETS'
+    | 'GIFTS'
 }
 
 const ExpensesInput: React.FC<ExpensesInputProps> = ({ label, contextKey }) => {
-  const {
-    setMortgageOrRent,
-    setFoodAndGroceries,
-    setUtilities,
-    setHomeInsurance,
-    setChildcareAndEducation,
-    setHolidays,
-    setPets,
-    setGifts,
-    mortgageOrRent,
-    foodAndGroceries,
-    utilities,
-    homeInsurance,
-    childcareAndEducation,
-    holidays,
-    pets,
-    gifts,
-  } = useExpenses()
+  const { state, dispatch } = useIncomeExpenses()
+  const { HouseholdExpenses, FamilyExpenses } = state
+  const { mortgageOrRent, foodAndGroceries, utilities, homeInsurance } = HouseholdExpenses
 
-  const setExpenses =
-    contextKey === 'MortgageOrRent'
-      ? setMortgageOrRent
-      : contextKey === 'FoodAndGroceries'
-      ? setFoodAndGroceries
-      : contextKey === 'Utilities'
-      ? setUtilities
-      : contextKey === 'HomeInsurance'
-      ? setHomeInsurance
-      : contextKey === 'ChildcareAndEducation'
-      ? setChildcareAndEducation
-      : contextKey === 'Holidays'
-      ? setHolidays
-      : contextKey === 'Pets'
-      ? setPets
-      : setGifts
+  const { childcareAndEducation, holidays, pets, gifts } = FamilyExpenses
+
+  const handleInputExpenses = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseFloat(e.target.value) || 0
+    dispatch({ type: contextKey, value })
+  }
 
   const expensesValue =
-    contextKey === 'MortgageOrRent'
+    contextKey === 'MORTGAGE_OR_RENT'
       ? mortgageOrRent
-      : contextKey === 'FoodAndGroceries'
+      : contextKey === 'FOOD_GROCERIES'
       ? foodAndGroceries
-      : contextKey === 'Utilities'
+      : contextKey === 'UTILITIES'
       ? utilities
-      : contextKey === 'HomeInsurance'
+      : contextKey === 'HOME_INSURANCE'
       ? homeInsurance
-      : contextKey === 'ChildcareAndEducation'
+      : contextKey === 'CHILD_CARE_EDUCATION'
       ? childcareAndEducation
-      : contextKey === 'Gifts'
+      : contextKey === 'GIFTS'
       ? gifts
-      : contextKey === 'Holidays'
+      : contextKey === 'HOLIDAYS'
       ? holidays
       : pets
   const typeOfExpense =
-    contextKey === 'MortgageOrRent'
+    contextKey === 'MORTGAGE_OR_RENT'
       ? 'Mortgage or Rent'
-      : contextKey === 'FoodAndGroceries'
+      : contextKey === 'FOOD_GROCERIES'
       ? 'Food and groceries'
-      : contextKey === 'Utilities'
+      : contextKey === 'UTILITIES'
       ? 'Utilities'
-      : contextKey === 'HomeInsurance'
+      : contextKey === 'HOME_INSURANCE'
       ? 'Home Insurance'
-      : contextKey === 'ChildcareAndEducation'
+      : contextKey === 'CHILD_CARE_EDUCATION'
       ? 'Child care & education'
-      : contextKey === 'Holidays'
+      : contextKey === 'HOLIDAYS'
       ? 'Holidays'
-      : contextKey === 'Pets'
+      : contextKey === 'PETS'
       ? 'Pets'
       : 'Gifts'
 
@@ -104,8 +79,8 @@ const ExpensesInput: React.FC<ExpensesInputProps> = ({ label, contextKey }) => {
         size="small"
         id="outlined-basic"
         label={label}
-        value={expensesValue}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setExpenses(parseFloat(e.target.value) || 0)}
+        value={expensesValue === 0 ? '' : expensesValue}
+        onChange={handleInputExpenses}
         sx={{ mr: 2 }}
       />
       <SelectFrequency />

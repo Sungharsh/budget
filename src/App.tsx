@@ -2,9 +2,8 @@ import Container from '@mui/material/Container'
 import Divider from '@mui/material/Divider'
 import React, { useState } from 'react'
 
-import { ExpensesContextProvider } from './components/context/ExpensesContext'
-import { IncomeProvider } from './components/context/IncomeContext'
-import AllExpensesList from './components/expenses/AllExpensesList'
+import { IncomeExpensesContextProvider } from './components/context/IncomeExpensesContext'
+import ExpensesInputList from './components/expenses/ExpensesInputList'
 import IncomeInput from './components/Income/IncomeInput'
 import TotalIncomeExpDisplay from './components/Income/TotalIncomeExpDisplay'
 import MenuBar from './components/navbar/AppBar'
@@ -22,16 +21,14 @@ const App: React.FC = () => {
 
   return (
     <>
-      <IncomeProvider>
-        <ExpensesContextProvider>
-          <MenuBar />
-          <Container maxWidth="md">
-            <TotalIncomeExpDisplay />
-            {flipPage ? <IncomeInput updateFlipPage={updateFlipPage} /> : <AllExpensesList />}
-          </Container>
-          <Divider sx={{ mt: 6 }} />
-        </ExpensesContextProvider>
-      </IncomeProvider>
+      <IncomeExpensesContextProvider>
+        <MenuBar />
+        <Container maxWidth="md">
+          <TotalIncomeExpDisplay />
+          {flipPage ? <IncomeInput updateFlipPage={updateFlipPage} /> : <ExpensesInputList />}
+        </Container>
+        <Divider sx={{ mt: 6 }} />
+      </IncomeExpensesContextProvider>
     </>
   )
 }

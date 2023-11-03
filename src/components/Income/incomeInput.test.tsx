@@ -1,14 +1,14 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 
-import { IncomeProvider } from '../context/IncomeContext'
+import { IncomeExpensesContextProvider } from '../context/IncomeExpensesContext'
 import IncomeInput from './IncomeInput'
 
 describe('incomeInput component', () => {
   it('should render the Income component', () => {
     render(
-      <IncomeProvider>
+      <IncomeExpensesContextProvider>
         <IncomeInput updateFlipPage={() => {}} />
-      </IncomeProvider>,
+      </IncomeExpensesContextProvider>,
     )
     const yourIncomeText = screen.getByText('Your Income')
     const incomeAmountText = screen.getByText('Please tell your income amount and how often you get it')
@@ -19,9 +19,9 @@ describe('incomeInput component', () => {
   it('should update the income value and enable button', () => {
     const updateFlipPageMock = jest.fn()
     render(
-      <IncomeProvider>
+      <IncomeExpensesContextProvider>
         <IncomeInput updateFlipPage={updateFlipPageMock} />
-      </IncomeProvider>,
+      </IncomeExpensesContextProvider>,
     )
     const incomeInput = screen.getByRole('spinbutton', { name: /income/i })
     const addButton = screen.getByText('Add another income')
