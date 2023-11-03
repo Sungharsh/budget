@@ -7,21 +7,29 @@ import { useState } from 'react'
 import React from 'react'
 
 import SelectFrequency from '../../utils/selectFrequency'
-import { useIncome } from '../context/IncomeContext'
+import { useIncomeExpenses } from '../context/IncomeExpensesContext'
 
 interface IncomeProps {
   updateFlipPage: () => void
 }
 const IncomeInput: React.FC<IncomeProps> = ({ updateFlipPage }) => {
-  const [value, setValue] = useState<string | number>('')
+  const [inputValue, setInputValue] = useState<number>(0)
   const [showAlert, setShowAlert] = useState<boolean>(true)
-  const { updateIncome } = useIncome()
-  const hasValue = value !== ''
+  const { dispatch } = useIncomeExpenses()
 
-  const haldleFlipPage = () => {
-    if (value) {
+  const handleFlipPage = () => {
+    if (inputValue) {
       updateFlipPage()
     }
+  }
+
+  const handleInputIncome = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!isNaN(inputValue)) {
+      setInputValue(parseFloat(e.target.value) || 0)
+    }
+  }
+  const handleUpdateIncome = () => {
+    dispatch({ type: 'INCOME', value: inputValue })
   }
 
   return (
@@ -60,10 +68,8 @@ const IncomeInput: React.FC<IncomeProps> = ({ updateFlipPage }) => {
           <TextField
             id="outlined-basic"
             label="Income"
-            value={value === '' ? '' : value}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setValue(Number(e.target.value))
-            }}
+            value={inputValue === 0 ? '' : inputValue}
+            onChange={handleInputIncome}
             type="number"
             required
             helperText="Please input your monthly income"
@@ -81,7 +87,7 @@ const IncomeInput: React.FC<IncomeProps> = ({ updateFlipPage }) => {
           mr: 6,
         }}
       >
-        <Button disabled={!hasValue} variant="contained" size="large" sx={{ pr: 2, pl: 2, mr: 4 }}>
+        <Button disabled={inputValue === 0} variant="contained" size="large" sx={{ pr: 2, pl: 2, mr: 4 }}>
           Add another income
         </Button>
         <Button
@@ -90,9 +96,9 @@ const IncomeInput: React.FC<IncomeProps> = ({ updateFlipPage }) => {
           size="large"
           sx={{ pr: 2, pl: 2 }}
           onClick={() => {
-            updateIncome(Number(value))
-            setValue('')
-            haldleFlipPage()
+            handleUpdateIncome()
+            setInputValue(0)
+            handleFlipPage()
           }}
         >
           Next

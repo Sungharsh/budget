@@ -8,15 +8,17 @@ import { useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import React, { useState } from 'react'
 
-import { useExpenses } from '../context/ExpensesContext'
+import { useIncomeExpenses } from '../context/IncomeExpensesContext'
 import ExpenseInput from './ExpenseInput'
 
-const AllExpensesList: React.FC = () => {
+const ExpensesInputList: React.FC = () => {
   const [showAlert, setShowAlert] = useState<boolean>(true)
-  const { mortgageOrRent, foodAndGroceries, utilities, homeInsurance, childcareAndEducation, holidays, pets, gifts } =
-    useExpenses()
-  const householdExpense = mortgageOrRent + foodAndGroceries + utilities + homeInsurance
-  const familyExpenses = childcareAndEducation + holidays + pets + gifts
+  const { state } = useIncomeExpenses()
+  const { foodAndGroceries, homeInsurance, mortgageOrRent, utilities } = state.HouseholdExpenses
+  const { childcareAndEducation, holidays, gifts, pets } = state.FamilyExpenses
+
+  const householdExpense = foodAndGroceries + homeInsurance + mortgageOrRent + utilities
+  const familyExpenses = childcareAndEducation + holidays + gifts + pets
 
   const theme = useTheme()
 
@@ -53,10 +55,10 @@ const AllExpensesList: React.FC = () => {
           </Box>
         </AccordionSummary>
         <AccordionDetails>
-          <ExpenseInput label="Rent" contextKey="MortgageOrRent" />
-          <ExpenseInput label="Food" contextKey="FoodAndGroceries" />
-          <ExpenseInput label="Utilities" contextKey="Utilities" />
-          <ExpenseInput label="HomeInsurance" contextKey="HomeInsurance" />
+          <ExpenseInput label="Rent" contextKey="MORTGAGE_OR_RENT" />
+          <ExpenseInput label="Food" contextKey="FOOD_GROCERIES" />
+          <ExpenseInput label="Utilities" contextKey="UTILITIES" />
+          <ExpenseInput label="HomeInsurance" contextKey="HOME_INSURANCE" />
         </AccordionDetails>
       </Accordion>
 
@@ -68,14 +70,14 @@ const AllExpensesList: React.FC = () => {
           </Box>
         </AccordionSummary>
         <AccordionDetails>
-          <ExpenseInput label="ChildCare" contextKey="ChildcareAndEducation" />
-          <ExpenseInput label="Holidays" contextKey="Holidays" />
-          <ExpenseInput label="Pets" contextKey="Pets" />
-          <ExpenseInput label="Gifts" contextKey="Gifts" />
+          <ExpenseInput label="Childcare" contextKey="CHILD_CARE_EDUCATION" />
+          <ExpenseInput label="Holidays" contextKey="HOLIDAYS" />
+          <ExpenseInput label="Pets" contextKey="PETS" />
+          <ExpenseInput label="Gifts" contextKey="GIFTS" />
         </AccordionDetails>
       </Accordion>
     </Box>
   )
 }
 
-export default AllExpensesList
+export default ExpensesInputList

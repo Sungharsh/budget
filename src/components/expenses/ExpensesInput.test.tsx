@@ -1,28 +1,28 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 
-import { ExpensesContextProvider } from '../context/ExpensesContext'
+import { IncomeExpensesContextProvider } from '../context/IncomeExpensesContext'
 import ExpensesInput from './ExpenseInput'
 
 describe('ExpensesInput Component', () => {
   it('Should render exepenses input component with the element with the correct label', () => {
     const label = 'Rent'
-    const contextKey = 'MortgageOrRent'
+    const contextKey = 'MORTGAGE_OR_RENT'
     render(
-      <ExpensesContextProvider>
+      <IncomeExpensesContextProvider>
         <ExpensesInput label={label} contextKey={contextKey} />
-      </ExpensesContextProvider>,
+      </IncomeExpensesContextProvider>,
     )
     const labelRentText = screen.getByLabelText('Rent')
     expect(labelRentText).toBeInTheDocument()
   })
   it('should update the expenses value when input changes', () => {
     const label = 'Rent'
-    const contextKey = 'MortgageOrRent'
-    const inititExpensesValue = 0
+    const contextKey = 'MORTGAGE_OR_RENT'
+    const inititExpensesValue = null
     render(
-      <ExpensesContextProvider>
+      <IncomeExpensesContextProvider>
         <ExpensesInput label={label} contextKey={contextKey} />
-      </ExpensesContextProvider>,
+      </IncomeExpensesContextProvider>,
     )
     const expensesInput = screen.getByRole('spinbutton', { name: /Rent/i })
     expect(expensesInput).toHaveValue(inititExpensesValue)

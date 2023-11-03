@@ -2,16 +2,15 @@ import Box from '@mui/material/Box'
 import { useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 
-import { useExpenses } from '../context/ExpensesContext'
-import { useIncome } from '../context/IncomeContext'
+import { useIncomeExpenses } from '../context/IncomeExpensesContext'
 
 const TotalIncomeExpDisplay: React.FC = () => {
-  const { income } = useIncome()
-  const { mortgageOrRent, foodAndGroceries, utilities, homeInsurance, childcareAndEducation, holidays, pets, gifts } =
-    useExpenses()
+  const { state } = useIncomeExpenses()
+  const { Income, FamilyExpenses, HouseholdExpenses } = state
+  const { mortgageOrRent, foodAndGroceries, utilities, homeInsurance } = HouseholdExpenses
+  const { childcareAndEducation, holidays, pets, gifts } = FamilyExpenses
   const totalExpenses =
     mortgageOrRent + foodAndGroceries + utilities + homeInsurance + childcareAndEducation + holidays + pets + gifts
-
   const theme = useTheme()
   return (
     <>
@@ -27,7 +26,7 @@ const TotalIncomeExpDisplay: React.FC = () => {
         }}
       >
         <Typography variant="h6" component="h2" sx={{ color: theme.palette.secondary.main }}>
-          INCOME: {Math.floor(income.amount)}
+          INCOME: {Math.floor(Income.salary)}
         </Typography>
         <Typography variant="h6" component="h2" sx={{ color: theme.palette.secondary.main }}>
           EXPENSES: {Math.floor(totalExpenses)}
