@@ -14,6 +14,12 @@ export interface IncomeExpensesStateType {
     pets: number
     gifts: number
   }
+  Finance: {
+    creditCardPayment: number
+    loanRepayment: number
+    carFinancePayment: number
+    otherLendingRepayment: number
+  }
 }
 
 export type Action =
@@ -51,5 +57,21 @@ export type Action =
     }
   | {
       type: 'GIFTS'
+      value: number
+    }
+  | {
+      type: 'CREDITCARD_PAYMENT'
+      value: number
+    }
+  | {
+      type: 'LOAN_REPAYMENT'
+      value: number
+    }
+  | {
+      type: 'CAR_FINANCE_PAYMENT'
+      value: number
+    }
+  | {
+      type: 'OTHER_LENDING_REPAYMENT'
       value: number
     }

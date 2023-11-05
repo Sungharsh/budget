@@ -5,10 +5,8 @@ import { AppReducer } from '../../store/AppReducer'
 import { AppState } from '../../store/AppState'
 import { Action } from '../Types'
 
-const IncomeExpenses = AppState
-
 export interface IncomeExpenseContextProps {
-  state: typeof IncomeExpenses
+  state: typeof AppState
   dispatch: React.Dispatch<Action>
 }
 
@@ -18,7 +16,7 @@ interface IncomeExpenseProviderProps {
 export const IncomeExpenseContext = createContext<IncomeExpenseContextProps | undefined>(undefined)
 
 export const IncomeExpensesContextProvider: React.FC<IncomeExpenseProviderProps> = ({ children }) => {
-  const [state, dispatch] = useImmerReducer(AppReducer, IncomeExpenses)
+  const [state, dispatch] = useImmerReducer(AppReducer, AppState)
   return <IncomeExpenseContext.Provider value={{ state, dispatch }}>{children}</IncomeExpenseContext.Provider>
 }
 

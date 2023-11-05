@@ -14,13 +14,13 @@ export const AppState = {
     pets: 0,
     gifts: 0,
   },
+  Finance: {
+    creditCardPayment: 0,
+    loanRepayment: 0,
+    carFinancePayment: 0,
+    otherLendingRepayment: 0,
+  },
   //FUTURE ADDITIONS
-  // Finance: {
-  //   creditCardPayments: 0,
-  //   loanRepayments: 0,
-  //   carFinancePayments: 0,
-  //   otherLendingRepayments: 0,
-  // },
   // HealthAndWellbeing: {
   //   gym: 0,
   //   healthInsurance: 0,
