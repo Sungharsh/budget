@@ -5,18 +5,14 @@ import React, { useState } from 'react'
 import { IncomeExpensesContextProvider } from './components/context/IncomeExpensesContext'
 import ExpensesInputList from './components/expenses/ExpensesInputList'
 import IncomeInput from './components/Income/IncomeInput'
-import TotalIncomeExpDisplay from './components/Income/TotalIncomeExpDisplay'
 import MenuBar from './components/navbar/AppBar'
+import TotalIncomeExpDisplay from './components/totalIncomeExpenses/TotalIncomeExpDisplay'
 
 const App: React.FC = () => {
   const [flipPage, setFlipPage] = useState<boolean>(true)
 
   const updateFlipPage = () => {
-    if (flipPage) {
-      setFlipPage(false)
-    } else {
-      setFlipPage(true)
-    }
+    setFlipPage(!flipPage)
   }
 
   return (

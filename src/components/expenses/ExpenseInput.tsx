@@ -16,14 +16,20 @@ export interface ExpensesInputProps {
     | 'HOLIDAYS'
     | 'PETS'
     | 'GIFTS'
+    | 'CREDITCARD_PAYMENT'
+    | 'LOAN_REPAYMENT'
+    | 'CAR_FINANCE_PAYMENT'
+    | 'OTHER_LENDING_REPAYMENT'
 }
 
 const ExpensesInput: React.FC<ExpensesInputProps> = ({ label, contextKey }) => {
   const { state, dispatch } = useIncomeExpenses()
-  const { HouseholdExpenses, FamilyExpenses } = state
+  const { HouseholdExpenses, FamilyExpenses, Finance } = state
   const { mortgageOrRent, foodAndGroceries, utilities, homeInsurance } = HouseholdExpenses
 
   const { childcareAndEducation, holidays, pets, gifts } = FamilyExpenses
+
+  const { creditCardPayment, loanRepayment, carFinancePayment, otherLendingRepayment } = Finance
 
   const handleInputExpenses = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value) || 0
@@ -45,23 +51,54 @@ const ExpensesInput: React.FC<ExpensesInputProps> = ({ label, contextKey }) => {
       ? gifts
       : contextKey === 'HOLIDAYS'
       ? holidays
-      : pets
-  const typeOfExpense =
-    contextKey === 'MORTGAGE_OR_RENT'
-      ? 'Mortgage or Rent'
-      : contextKey === 'FOOD_GROCERIES'
-      ? 'Food and groceries'
-      : contextKey === 'UTILITIES'
-      ? 'Utilities'
-      : contextKey === 'HOME_INSURANCE'
-      ? 'Home Insurance'
-      : contextKey === 'CHILD_CARE_EDUCATION'
-      ? 'Child care & education'
-      : contextKey === 'HOLIDAYS'
-      ? 'Holidays'
       : contextKey === 'PETS'
-      ? 'Pets'
-      : 'Gifts'
+      ? pets
+      : contextKey === 'CREDITCARD_PAYMENT'
+      ? creditCardPayment
+      : contextKey === 'LOAN_REPAYMENT'
+      ? loanRepayment
+      : contextKey === 'CAR_FINANCE_PAYMENT'
+      ? carFinancePayment
+      : otherLendingRepayment
+
+  // const typeOfExpense =
+  //   contextKey === 'MORTGAGE_OR_RENT'
+  //     ? 'Mortgage or Rent'
+  //     : contextKey === 'FOOD_GROCERIES'
+  //     ? 'Food and groceries'
+  //     : contextKey === 'UTILITIES'
+  //     ? 'Utilities'
+  //     : contextKey === 'HOME_INSURANCE'
+  //     ? 'Home Insurance'
+  //     : contextKey === 'CHILD_CARE_EDUCATION'
+  //     ? 'Child care & education'
+  //     : contextKey === 'HOLIDAYS'
+  //     ? 'Holidays'
+  //     : contextKey === 'PETS'
+  //     ? 'Pets'
+  //     : contextKey === 'GIFTS'
+  //     ? 'Gifts'
+  //     : contextKey === 'CREDITCARD_PAYMENTS'
+  //     ? 'Credit Card'
+  //     : contextKey === 'LOAN_REPAYMENTS'
+  //     ? 'Loan'
+  //     : contextKey === 'CAR_FINANCE_PAYMENTS'
+  //     ? 'Car Finance'
+  //     : 'Other Lendings'
+  const typeOfExpense = {
+    MORTGAGE_OR_RENT: 'Mortgage or Rent',
+    FOOD_GROCERIES: 'Food and Groceries',
+    UTILITIES: 'Utilities',
+    HOME_INSURANCE: 'Home Insurance',
+    CHILD_CARE_EDUCATION: 'Child Care & Education',
+    HOLIDAYS: 'Holidays',
+    PETS: 'Pets',
+    GIFTS: 'Gifts',
+    CREDITCARD_PAYMENT: 'Credit Card',
+    LOAN_REPAYMENT: 'Loan',
+    CAR_FINANCE_PAYMENT: 'Car Finance',
+    OTHER_LENDING_REPAYMENT: 'Other Lendings',
+  }[contextKey]
 
   return (
     <Box
@@ -73,6 +110,7 @@ const ExpensesInput: React.FC<ExpensesInputProps> = ({ label, contextKey }) => {
       }}
     >
       <p>{typeOfExpense}</p>
+
       <TextField
         type="number"
         variant="outlined"

@@ -42,6 +42,22 @@ export const AppReducer: Reducer<IncomeExpensesStateType, Action> = (state: type
       state.FamilyExpenses.gifts = action.value
       break
     }
+    case 'CREDITCARD_PAYMENT': {
+      state.Finance.creditCardPayment = action.value
+      break
+    }
+    case 'LOAN_REPAYMENT': {
+      state.Finance.loanRepayment = action.value
+      break
+    }
+    case 'CAR_FINANCE_PAYMENT': {
+      state.Finance.carFinancePayment = action.value
+      break
+    }
+    case 'OTHER_LENDING_REPAYMENT': {
+      state.Finance.otherLendingRepayment = action.value
+      break
+    }
     default:
       throw Error('Unknown action' + action)
   }
