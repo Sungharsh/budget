@@ -23,8 +23,17 @@ const ExpensesInputList: React.FC = () => {
 
   const theme = useTheme()
   const primaryColour = theme.palette.primary.main
+  type CategoryType = 'HOUSEHOLD' | 'FAMILY' | 'FINANCE'
 
-  const handleChange = (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+  const handlePanel = (expensesCategory: CategoryType) => {
+    if (expensesCategory === 'HOUSEHOLD') return 'panel1'
+    if (expensesCategory === 'FAMILY') return 'panel2'
+    if (expensesCategory === 'FINANCE') return 'panel3'
+    return false
+  }
+
+  const handleChange = (expensesCategory: CategoryType) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+    const panel = handlePanel(expensesCategory)
     setExpanded(isExpanded ? panel : false)
   }
 
@@ -33,10 +42,79 @@ const ExpensesInputList: React.FC = () => {
     marginBottom: '6px',
     p: 1,
   }
+
   const totalExpensesStyle = {
     margin: '0 0 0 auto',
     color: primaryColour,
   }
+
+  const getPanel = (expensesCategory: CategoryType) => {
+    if (expensesCategory === 'HOUSEHOLD') return expanded === 'panel1'
+    if (expensesCategory === 'FAMILY') return expanded === 'panel2'
+    if (expensesCategory === 'FINANCE') return expanded === 'panel3'
+    return false
+  }
+
+  const renderAccordianTitle = (expensesCategory: CategoryType) =>
+    expensesCategory === 'HOUSEHOLD' ? (
+      <Typography variant="h3">Household</Typography>
+    ) : expensesCategory === 'FAMILY' ? (
+      <Typography variant="h3">Family</Typography>
+    ) : (
+      <Typography variant="h3">Finance</Typography>
+    )
+
+  const getTotalExpenses = (expensesCategory: CategoryType) => {
+    if (expensesCategory === 'HOUSEHOLD') {
+      return <Typography>{Math.floor(householdExpensesTotal)}</Typography>
+    } else if (expensesCategory === 'FAMILY') {
+      return <Typography>{Math.floor(familyExpensesTotal)}</Typography>
+    } else if (expensesCategory === 'FINANCE') {
+      return <Typography>{Math.floor(financeTotal)}</Typography>
+    }
+    return 0
+  }
+
+  const renderExpensesInputs = (expensesCategory: CategoryType) => {
+    if (expensesCategory === 'HOUSEHOLD') {
+      return (
+        <>
+          <ExpenseInput label="Mortgage or Rent" contextKey="MORTGAGE_OR_RENT" />
+          <ExpenseInput label="Food and Groceries" contextKey="FOOD_GROCERIES" />
+          <ExpenseInput label="Utilities" contextKey="UTILITIES" />
+          <ExpenseInput label="Home Insurance" contextKey="HOME_INSURANCE" />
+        </>
+      )
+    } else if (expensesCategory === 'FAMILY') {
+      return (
+        <>
+          <ExpenseInput label="Childcare" contextKey="CHILD_CARE_EDUCATION" />
+          <ExpenseInput label="Holidays" contextKey="HOLIDAYS" />
+          <ExpenseInput label="Pets" contextKey="PETS" />
+          <ExpenseInput label="Gifts" contextKey="GIFTS" />
+        </>
+      )
+    } else {
+      return (
+        <>
+          <ExpenseInput label="Credit Card" contextKey="CREDITCARD_PAYMENT" />
+          <ExpenseInput label="Loan" contextKey="LOAN_REPAYMENT" />
+          <ExpenseInput label="Car Finance" contextKey="CAR_FINANCE_PAYMENT" />
+          <ExpenseInput label="Other Lending" contextKey="OTHER_LENDING_REPAYMENT" />
+        </>
+      )
+    }
+  }
+
+  const renderAccordion = (expensesCategory: CategoryType) => (
+    <Accordion expanded={getPanel(expensesCategory)} onChange={handleChange(expensesCategory)} sx={accordianStyle}>
+      <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
+        {renderAccordianTitle(expensesCategory)}
+        <Box sx={totalExpensesStyle}>{getTotalExpenses(expensesCategory)}</Box>
+      </AccordionSummary>
+      <AccordionDetails>{renderExpensesInputs(expensesCategory)}</AccordionDetails>
+    </Accordion>
+  )
 
   return (
     <Box
@@ -63,50 +141,9 @@ const ExpensesInputList: React.FC = () => {
         </Alert>
       )}
 
-      <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')} sx={accordianStyle}>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
-          <Typography variant="h3">Household</Typography>
-          <Box sx={totalExpensesStyle}>
-            <Typography variant="h3">{Math.floor(householdExpensesTotal)}</Typography>
-          </Box>
-        </AccordionSummary>
-        <AccordionDetails>
-          <ExpenseInput label="Mortgage or Rent" contextKey="MORTGAGE_OR_RENT" />
-          <ExpenseInput label="Food and Groceries" contextKey="FOOD_GROCERIES" />
-          <ExpenseInput label="Utilities" contextKey="UTILITIES" />
-          <ExpenseInput label="Home Insurance" contextKey="HOME_INSURANCE" />
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')} sx={accordianStyle}>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
-          <Typography variant="h3">Family</Typography>
-          <Box sx={totalExpensesStyle}>
-            <Typography variant="h3">{Math.floor(familyExpensesTotal)}</Typography>
-          </Box>
-        </AccordionSummary>
-        <AccordionDetails>
-          <ExpenseInput label="Childcare" contextKey="CHILD_CARE_EDUCATION" />
-          <ExpenseInput label="Holidays" contextKey="HOLIDAYS" />
-          <ExpenseInput label="Pets" contextKey="PETS" />
-          <ExpenseInput label="Gifts" contextKey="GIFTS" />
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')} sx={accordianStyle}>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
-          <Typography variant="h3">Finance</Typography>
-          <Box sx={totalExpensesStyle}>
-            <Typography variant="h3">{Math.floor(financeTotal)}</Typography>
-          </Box>
-        </AccordionSummary>
-        <AccordionDetails>
-          <ExpenseInput label="Credit Card" contextKey="CREDITCARD_PAYMENT" />
-          <ExpenseInput label="Loan" contextKey="LOAN_REPAYMENT" />
-          <ExpenseInput label="Car Finance" contextKey="CAR_FINANCE_PAYMENT" />
-          <ExpenseInput label="Other Lending" contextKey="OTHER_LENDING_REPAYMENT" />
-        </AccordionDetails>
-      </Accordion>
+      {renderAccordion('HOUSEHOLD')}
+      {renderAccordion('FAMILY')}
+      {renderAccordion('FINANCE')}
     </Box>
   )
 }
