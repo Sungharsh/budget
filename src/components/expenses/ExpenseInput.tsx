@@ -61,30 +61,6 @@ const ExpensesInput: React.FC<ExpensesInputProps> = ({ label, contextKey }) => {
       ? carFinancePayment
       : otherLendingRepayment
 
-  // const typeOfExpense =
-  //   contextKey === 'MORTGAGE_OR_RENT'
-  //     ? 'Mortgage or Rent'
-  //     : contextKey === 'FOOD_GROCERIES'
-  //     ? 'Food and groceries'
-  //     : contextKey === 'UTILITIES'
-  //     ? 'Utilities'
-  //     : contextKey === 'HOME_INSURANCE'
-  //     ? 'Home Insurance'
-  //     : contextKey === 'CHILD_CARE_EDUCATION'
-  //     ? 'Child care & education'
-  //     : contextKey === 'HOLIDAYS'
-  //     ? 'Holidays'
-  //     : contextKey === 'PETS'
-  //     ? 'Pets'
-  //     : contextKey === 'GIFTS'
-  //     ? 'Gifts'
-  //     : contextKey === 'CREDITCARD_PAYMENTS'
-  //     ? 'Credit Card'
-  //     : contextKey === 'LOAN_REPAYMENTS'
-  //     ? 'Loan'
-  //     : contextKey === 'CAR_FINANCE_PAYMENTS'
-  //     ? 'Car Finance'
-  //     : 'Other Lendings'
   const typeOfExpense = {
     MORTGAGE_OR_RENT: 'Mortgage or Rent',
     FOOD_GROCERIES: 'Food and Groceries',
