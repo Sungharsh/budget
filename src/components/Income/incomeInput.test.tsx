@@ -7,7 +7,7 @@ describe('incomeInput component', () => {
   it('should render the Income component', () => {
     render(
       <IncomeExpensesContextProvider>
-        <IncomeInput updateFlipPage={() => {}} />
+        <IncomeInput />
       </IncomeExpensesContextProvider>,
     )
     const yourIncomeText = screen.getByText('Your Income')
@@ -16,11 +16,20 @@ describe('incomeInput component', () => {
     expect(incomeAmountText).toBeInTheDocument()
   })
 
-  it('should update the income value and enable button', () => {
-    const updateFlipPageMock = jest.fn()
+  it('displays alert message', () => {
     render(
       <IncomeExpensesContextProvider>
-        <IncomeInput updateFlipPage={updateFlipPageMock} />
+        <IncomeInput />
+      </IncomeExpensesContextProvider>,
+    )
+    const alertMessage = screen.getByText('Amount will be rounded for you')
+    expect(alertMessage).toBeInTheDocument()
+  })
+
+  it('should update the income value and enable button', () => {
+    render(
+      <IncomeExpensesContextProvider>
+        <IncomeInput />
       </IncomeExpensesContextProvider>,
     )
     const incomeInput = screen.getByRole('spinbutton', { name: /income/i })
@@ -29,14 +38,11 @@ describe('incomeInput component', () => {
 
     expect(incomeInput).toHaveValue(null)
     expect(addButton).toBeDisabled()
-    expect(nextButton).toBeEnabled()
+    expect(nextButton).toBeDisabled()
 
     fireEvent.change(incomeInput, { target: { value: '1000' } })
     expect(incomeInput).toHaveValue(1000)
     expect(addButton).toBeEnabled()
     expect(nextButton).toBeEnabled()
-
-    fireEvent.click(nextButton)
-    expect(updateFlipPageMock).toHaveBeenCalled()
   })
 })

@@ -20,6 +20,9 @@ export const AppState = {
     carFinancePayment: 0,
     otherLendingRepayment: 0,
   },
+  HandleFlipPage: {
+    flipPage: true,
+  },
   //FUTURE ADDITIONS
   // HealthAndWellbeing: {
   //   gym: 0,

@@ -20,6 +20,9 @@ export interface IncomeExpensesStateType {
     carFinancePayment: number
     otherLendingRepayment: number
   }
+  HandleFlipPage: {
+    flipPage: boolean
+  }
 }
 
 export type Action =
@@ -74,4 +77,8 @@ export type Action =
   | {
       type: 'OTHER_LENDING_REPAYMENT'
       value: number
+    }
+  | {
+      type: 'FLIP_PAGE'
+      value: boolean
     }

@@ -58,6 +58,10 @@ export const AppReducer: Reducer<IncomeExpensesStateType, Action> = (state: type
       state.Finance.otherLendingRepayment = action.value
       break
     }
+    case 'FLIP_PAGE': {
+      state.HandleFlipPage.flipPage = action.value
+      break
+    }
     default:
       throw Error('Unknown action' + action)
   }
