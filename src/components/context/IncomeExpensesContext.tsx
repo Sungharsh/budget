@@ -24,7 +24,7 @@ export const useIncomeExpenses = () => {
   const context = useContext(IncomeExpenseContext)
 
   if (!context) {
-    throw new Error('useExpenses must be used within an ExpensesProvider')
+    throw new Error('useExpenses must be used within an IncomeExpensesProvider')
   }
 
   return context

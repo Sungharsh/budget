@@ -9,27 +9,25 @@ import React from 'react'
 import SelectFrequency from '../../utils/selectFrequency'
 import { useIncomeExpenses } from '../context/IncomeExpensesContext'
 
-interface IncomeProps {
-  updateFlipPage: () => void
-}
-const IncomeInput: React.FC<IncomeProps> = ({ updateFlipPage }) => {
-  const [inputValue, setInputValue] = useState<number>(0)
+const IncomeInput: React.FC = () => {
   const [showAlert, setShowAlert] = useState<boolean>(true)
-  const { dispatch } = useIncomeExpenses()
+  const { state, dispatch } = useIncomeExpenses()
+
+  const totalIncome = state.Income.salary
+  const getContained = totalIncome === 0 ? 'outlined' : 'contained'
+  const getOutlined = totalIncome === 0 ? 'text' : 'outlined'
 
   const handleFlipPage = () => {
-    if (inputValue) {
-      updateFlipPage()
+    const getFlipPage = state.HandleFlipPage.flipPage
+    const value = !getFlipPage
+    if (totalIncome) {
+      dispatch({ type: 'FLIP_PAGE', value })
     }
   }
 
   const handleInputIncome = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!isNaN(inputValue)) {
-      setInputValue(parseFloat(e.target.value) || 0)
-    }
-  }
-  const handleUpdateIncome = () => {
-    dispatch({ type: 'INCOME', value: inputValue })
+    const getValue = parseFloat(e.target.value) || 0
+    dispatch({ type: 'INCOME', value: getValue })
   }
 
   return (
@@ -68,7 +66,7 @@ const IncomeInput: React.FC<IncomeProps> = ({ updateFlipPage }) => {
           <TextField
             id="outlined-basic"
             label="Income"
-            value={inputValue === 0 ? '' : inputValue}
+            value={totalIncome === 0 ? '' : totalIncome}
             onChange={handleInputIncome}
             type="number"
             required
@@ -87,17 +85,16 @@ const IncomeInput: React.FC<IncomeProps> = ({ updateFlipPage }) => {
           mr: 6,
         }}
       >
-        <Button disabled={inputValue === 0} variant="contained" size="large" sx={{ pr: 2, pl: 2, mr: 4 }}>
+        <Button disabled={totalIncome === 0} variant={getOutlined} size="large" sx={{ pr: 2, pl: 2, mr: 4 }}>
           Add another income
         </Button>
         <Button
           type="submit"
-          variant="contained"
+          variant={getContained}
+          disabled={totalIncome === 0}
           size="large"
           sx={{ pr: 2, pl: 2 }}
           onClick={() => {
-            handleUpdateIncome()
-            setInputValue(0)
             handleFlipPage()
           }}
         >
