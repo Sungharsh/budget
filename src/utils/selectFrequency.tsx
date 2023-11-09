@@ -14,15 +14,7 @@ const SelectFrequency = () => {
     },
   ]
   return (
-    <TextField
-      required
-      id="outlined-disabled"
-      helperText="Please select frequency"
-      select
-      label="select"
-      defaultValue="Monthly"
-      size="small"
-    >
+    <TextField required id="outlined-disabled" select defaultValue="Monthly" size="small">
       {selectPeriod.map(option => (
         <MenuItem key={option.value} value={option.value}>
           {option.value}

@@ -5,31 +5,45 @@ import AccordionSummary from '@mui/material/AccordionSummary'
 import Alert from '@mui/material/Alert'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
-import { useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import React, { useState } from 'react'
 
 import { useIncomeExpenses } from '../context/IncomeExpensesContext'
-import ExpenseInput from './ExpenseInput'
+import { CategoryType } from './ExpensesTypes'
+import { GetTotalExpenses } from './GetTotalExpenses'
+import { RenderAccordianTitle } from './RenderAccordianTitle'
+import { RenderExpensesInputs } from './RenderExpensesInputs'
 
 const ExpensesInputList: React.FC = () => {
   const [showAlert, setShowAlert] = useState<boolean>(true)
   const [expanded, setExpanded] = useState<string | boolean>(false)
   const { state, dispatch } = useIncomeExpenses()
-  const { HouseholdExpenses, FamilyExpenses, Finance } = state
 
-  const householdExpensesTotal = Object.values(HouseholdExpenses).reduce((acc, value) => acc + value, 0)
-  const familyExpensesTotal = Object.values(FamilyExpenses).reduce((acc, value) => acc + value, 0)
-  const financeTotal = Object.values(Finance).reduce((acc, value) => acc + value, 0)
-
-  const theme = useTheme()
-  const primaryColour = { color: theme.palette.primary.main }
-  type CategoryType = 'HOUSEHOLD' | 'FAMILY' | 'FINANCE'
+  const accordianStyle = {
+    boxShadow: 3,
+    marginBottom: '6px',
+    p: 1,
+  }
 
   const handlePanel = (expensesCategory: CategoryType) => {
     if (expensesCategory === 'HOUSEHOLD') return 'panel1'
     if (expensesCategory === 'FAMILY') return 'panel2'
     if (expensesCategory === 'FINANCE') return 'panel3'
+    if (expensesCategory === 'HEALTH') return 'panel4'
+    if (expensesCategory === 'TRANSPORT') return 'panel5'
+    if (expensesCategory === 'ENTERTAINMENT') return 'panel6'
+    if (expensesCategory === 'OTHER') return 'panel7'
+    return false
+  }
+
+  const getPanel = (expensesCategory: CategoryType) => {
+    if (expensesCategory === 'HOUSEHOLD') return expanded === 'panel1'
+    if (expensesCategory === 'FAMILY') return expanded === 'panel2'
+    if (expensesCategory === 'FINANCE') return expanded === 'panel3'
+    if (expensesCategory === 'HEALTH') return expanded === 'panel4'
+    if (expensesCategory === 'TRANSPORT') return expanded === 'panel5'
+    if (expensesCategory === 'ENTERTAINMENT') return expanded === 'panel6'
+    if (expensesCategory === 'OTHER') return expanded === 'panel7'
     return false
   }
 
@@ -38,89 +52,13 @@ const ExpensesInputList: React.FC = () => {
     setExpanded(isExpanded ? panel : false)
   }
 
-  const accordianStyle = {
-    boxShadow: 3,
-    marginBottom: '6px',
-    p: 1,
-  }
-
-  const getPanel = (expensesCategory: CategoryType) => {
-    if (expensesCategory === 'HOUSEHOLD') return expanded === 'panel1'
-    if (expensesCategory === 'FAMILY') return expanded === 'panel2'
-    if (expensesCategory === 'FINANCE') return expanded === 'panel3'
-    return false
-  }
-
-  const renderAccordianTitle = (expensesCategory: CategoryType) =>
-    expensesCategory === 'HOUSEHOLD' ? (
-      <Typography variant="h3">Household</Typography>
-    ) : expensesCategory === 'FAMILY' ? (
-      <Typography variant="h3">Family</Typography>
-    ) : (
-      <Typography variant="h3">Finance</Typography>
-    )
-
-  const getTotalExpenses = (expensesCategory: CategoryType) => {
-    if (expensesCategory === 'HOUSEHOLD') {
-      return (
-        <Typography variant="h3" sx={primaryColour}>
-          {Math.floor(householdExpensesTotal)}
-        </Typography>
-      )
-    } else if (expensesCategory === 'FAMILY') {
-      return (
-        <Typography variant="h3" sx={primaryColour}>
-          {Math.floor(familyExpensesTotal)}
-        </Typography>
-      )
-    } else if (expensesCategory === 'FINANCE') {
-      return (
-        <Typography variant="h3" sx={primaryColour}>
-          {Math.floor(financeTotal)}
-        </Typography>
-      )
-    }
-    return 0
-  }
-
-  const renderExpensesInputs = (expensesCategory: CategoryType) => {
-    if (expensesCategory === 'HOUSEHOLD') {
-      return (
-        <>
-          <ExpenseInput label="Mortgage or Rent" contextKey="MORTGAGE_OR_RENT" />
-          <ExpenseInput label="Food and Groceries" contextKey="FOOD_GROCERIES" />
-          <ExpenseInput label="Utilities" contextKey="UTILITIES" />
-          <ExpenseInput label="Home Insurance" contextKey="HOME_INSURANCE" />
-        </>
-      )
-    } else if (expensesCategory === 'FAMILY') {
-      return (
-        <>
-          <ExpenseInput label="Childcare" contextKey="CHILD_CARE_EDUCATION" />
-          <ExpenseInput label="Holidays" contextKey="HOLIDAYS" />
-          <ExpenseInput label="Pets" contextKey="PETS" />
-          <ExpenseInput label="Gifts" contextKey="GIFTS" />
-        </>
-      )
-    } else {
-      return (
-        <>
-          <ExpenseInput label="Credit Card" contextKey="CREDITCARD_PAYMENT" />
-          <ExpenseInput label="Loan" contextKey="LOAN_REPAYMENT" />
-          <ExpenseInput label="Car Finance" contextKey="CAR_FINANCE_PAYMENT" />
-          <ExpenseInput label="Other Lending" contextKey="OTHER_LENDING_REPAYMENT" />
-        </>
-      )
-    }
-  }
-
   const renderAccordion = (expensesCategory: CategoryType) => (
     <Accordion expanded={getPanel(expensesCategory)} onChange={handleChange(expensesCategory)} sx={accordianStyle}>
       <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
-        {renderAccordianTitle(expensesCategory)}
-        <Box sx={{ margin: '0 0 0 auto' }}>{getTotalExpenses(expensesCategory)}</Box>
+        {RenderAccordianTitle(expensesCategory)}
+        <Box sx={{ margin: '0 0 0 auto' }}>{GetTotalExpenses(expensesCategory)}</Box>
       </AccordionSummary>
-      <AccordionDetails>{renderExpensesInputs(expensesCategory)}</AccordionDetails>
+      <AccordionDetails>{RenderExpensesInputs(expensesCategory)}</AccordionDetails>
     </Accordion>
   )
 
@@ -143,7 +81,7 @@ const ExpensesInputList: React.FC = () => {
           Your Expenses
         </Typography>
         <Typography component="p" sx={{ mb: 2 }}>
-          Please fill in your expenses
+          Please fill in all your expenses
         </Typography>
 
         {showAlert && (
@@ -159,6 +97,10 @@ const ExpensesInputList: React.FC = () => {
         {renderAccordion('HOUSEHOLD')}
         {renderAccordion('FAMILY')}
         {renderAccordion('FINANCE')}
+        {renderAccordion('HEALTH')}
+        {renderAccordion('TRANSPORT')}
+        {renderAccordion('ENTERTAINMENT')}
+        {renderAccordion('OTHER')}
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
         <Button variant="outlined" size="large" onClick={handleFlipPage} sx={{ mr: 4, pl: 2 }}>

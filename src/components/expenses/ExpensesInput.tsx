@@ -4,37 +4,20 @@ import React from 'react'
 
 import SelectFrequency from '../../utils/selectFrequency'
 import { useIncomeExpenses } from '../context/IncomeExpensesContext'
-
-export interface ExpensesInputProps {
-  label: string
-  contextKey:
-    | 'MORTGAGE_OR_RENT'
-    | 'FOOD_GROCERIES'
-    | 'UTILITIES'
-    | 'HOME_INSURANCE'
-    | 'CHILD_CARE_EDUCATION'
-    | 'HOLIDAYS'
-    | 'PETS'
-    | 'GIFTS'
-    | 'CREDITCARD_PAYMENT'
-    | 'LOAN_REPAYMENT'
-    | 'CAR_FINANCE_PAYMENT'
-    | 'OTHER_LENDING_REPAYMENT'
-}
+import { ExpensesInputProps } from './ExpensesTypes'
 
 const ExpensesInput: React.FC<ExpensesInputProps> = ({ label, contextKey }) => {
   const { state, dispatch } = useIncomeExpenses()
-  const { HouseholdExpenses, FamilyExpenses, Finance } = state
+  const { HouseholdExpenses, FamilyExpenses, Finance, HealthAndWellbeing, Transport, Entertainment, Other } = state
+
   const { mortgageOrRent, foodAndGroceries, utilities, homeInsurance } = HouseholdExpenses
-
   const { childcareAndEducation, holidays, pets, gifts } = FamilyExpenses
-
   const { creditCardPayment, loanRepayment, carFinancePayment, otherLendingRepayment } = Finance
+  const { gym, healthInsurance, lifeInsurance, treatments } = HealthAndWellbeing
+  const { carInsurance, carMaintenance, parking, publicTransport } = Transport
+  const { hobbies, internetTVandMobile, outingsGoingOut, subscriptions } = Entertainment
 
-  const handleInputExpenses = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseFloat(e.target.value) || 0
-    dispatch({ type: contextKey, value })
-  }
+  const { anyOtherExpenses } = Other
 
   const expensesValue =
     contextKey === 'MORTGAGE_OR_RENT'
@@ -59,7 +42,33 @@ const ExpensesInput: React.FC<ExpensesInputProps> = ({ label, contextKey }) => {
       ? loanRepayment
       : contextKey === 'CAR_FINANCE_PAYMENT'
       ? carFinancePayment
-      : otherLendingRepayment
+      : contextKey === 'OTHER_LENDING_REPAYMENT'
+      ? otherLendingRepayment
+      : contextKey === 'GYM'
+      ? gym
+      : contextKey === 'HEALTH_INSURANCE'
+      ? healthInsurance
+      : contextKey === 'LIFE_INSURANCE'
+      ? lifeInsurance
+      : contextKey === 'TREATMENTS'
+      ? treatments
+      : contextKey === 'CAR_INSURANCE'
+      ? carInsurance
+      : contextKey === 'CAR_MAINTENANCE'
+      ? carMaintenance
+      : contextKey === 'PUBLIC_TRANSPORT'
+      ? publicTransport
+      : contextKey === 'PARKING'
+      ? parking
+      : contextKey === 'INTERNET_TV_MOBILE'
+      ? internetTVandMobile
+      : contextKey === 'SUBSCRIPTIONS'
+      ? subscriptions
+      : contextKey === 'HOBBIES'
+      ? hobbies
+      : contextKey === 'OUTINGS_GOING_OUT'
+      ? outingsGoingOut
+      : anyOtherExpenses
 
   const typeOfExpense = {
     MORTGAGE_OR_RENT: 'Mortgage or Rent',
@@ -74,7 +83,26 @@ const ExpensesInput: React.FC<ExpensesInputProps> = ({ label, contextKey }) => {
     LOAN_REPAYMENT: 'Loan',
     CAR_FINANCE_PAYMENT: 'Car Finance',
     OTHER_LENDING_REPAYMENT: 'Other Lendings',
+    GYM: 'Gym',
+    HEALTH_INSURANCE: 'Health insurance',
+    LIFE_INSURANCE: 'Life insurance',
+    TREATMENTS: 'Treatments',
+    CAR_INSURANCE: 'Car insurance',
+    CAR_MAINTENANCE: 'Car Maintanace',
+    PUBLIC_TRANSPORT: 'Public transport',
+    PARKING: 'Parking',
+    INTERNET_TV_MOBILE: 'Internet, TV, Mobile',
+    SUBSCRIPTIONS: 'Subscriptions',
+    HOBBIES: 'Hobbies',
+    OUTINGS_GOING_OUT: 'Outing',
+    ANY_OTHER_EXPENSES: 'Any other Expenses',
   }[contextKey]
+
+  const handleInputExpenses = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length === 6) return
+    const value = parseFloat(e.target.value) || 0
+    dispatch({ type: contextKey, value })
+  }
 
   return (
     <Box
