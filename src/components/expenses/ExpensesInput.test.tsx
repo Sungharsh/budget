@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 
 import { IncomeExpensesContextProvider } from '../context/IncomeExpensesContext'
-import ExpensesInput from './ExpenseInput'
+import ExpensesInput from './ExpensesInput'
 
 describe('ExpensesInput Component', () => {
   it('Should render exepenses input component with the element with the correct label', () => {

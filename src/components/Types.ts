@@ -20,6 +20,27 @@ export interface IncomeExpensesStateType {
     carFinancePayment: number
     otherLendingRepayment: number
   }
+  HealthAndWellbeing: {
+    gym: number
+    healthInsurance: number
+    lifeInsurance: number
+    treatments: number
+  }
+  Transport: {
+    carInsurance: number
+    carMaintenance: number
+    publicTransport: number
+    parking: number
+  }
+  Entertainment: {
+    internetTVandMobile: number
+    subscriptions: number
+    hobbies: number
+    outingsGoingOut: number
+  }
+  Other: {
+    anyOtherExpenses: number
+  }
   HandleFlipPage: {
     flipPage: boolean
   }
@@ -76,6 +97,58 @@ export type Action =
     }
   | {
       type: 'OTHER_LENDING_REPAYMENT'
+      value: number
+    }
+  | {
+      type: 'GYM'
+      value: number
+    }
+  | {
+      type: 'HEALTH_INSURANCE'
+      value: number
+    }
+  | {
+      type: 'LIFE_INSURANCE'
+      value: number
+    }
+  | {
+      type: 'TREATMENTS'
+      value: number
+    }
+  | {
+      type: 'CAR_INSURANCE'
+      value: number
+    }
+  | {
+      type: 'CAR_MAINTENANCE'
+      value: number
+    }
+  | {
+      type: 'PUBLIC_TRANSPORT'
+      value: number
+    }
+  | {
+      type: 'PARKING'
+      value: number
+    }
+  | {
+      type: 'INTERNET_TV_MOBILE'
+      value: number
+    }
+  | {
+      type: 'SUBSCRIPTIONS'
+      value: number
+    }
+  | {
+      type: 'HOBBIES'
+      value: number
+    }
+  | {
+      type: 'OUTINGS_GOING_OUT'
+      value: number
+    }
+  | {
+      type: 'ANY_OTHER_EXPENSES'
       value: number
     }
   | {

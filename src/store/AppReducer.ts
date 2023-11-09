@@ -58,6 +58,58 @@ export const AppReducer: Reducer<IncomeExpensesStateType, Action> = (state: type
       state.Finance.otherLendingRepayment = action.value
       break
     }
+    case 'GYM': {
+      state.HealthAndWellbeing.gym = action.value
+      break
+    }
+    case 'HEALTH_INSURANCE': {
+      state.HealthAndWellbeing.healthInsurance = action.value
+      break
+    }
+    case 'LIFE_INSURANCE': {
+      state.HealthAndWellbeing.lifeInsurance = action.value
+      break
+    }
+    case 'TREATMENTS': {
+      state.HealthAndWellbeing.treatments = action.value
+      break
+    }
+    case 'CAR_INSURANCE': {
+      state.Transport.carInsurance = action.value
+      break
+    }
+    case 'CAR_MAINTENANCE': {
+      state.Transport.carMaintenance = action.value
+      break
+    }
+    case 'PUBLIC_TRANSPORT': {
+      state.Transport.publicTransport = action.value
+      break
+    }
+    case 'PARKING': {
+      state.Transport.parking = action.value
+      break
+    }
+    case 'INTERNET_TV_MOBILE': {
+      state.Entertainment.internetTVandMobile = action.value
+      break
+    }
+    case 'SUBSCRIPTIONS': {
+      state.Entertainment.subscriptions = action.value
+      break
+    }
+    case 'HOBBIES': {
+      state.Entertainment.hobbies = action.value
+      break
+    }
+    case 'OUTINGS_GOING_OUT': {
+      state.Entertainment.outingsGoingOut = action.value
+      break
+    }
+    case 'ANY_OTHER_EXPENSES': {
+      state.Other.anyOtherExpenses = action.value
+      break
+    }
     case 'FLIP_PAGE': {
       state.HandleFlipPage.flipPage = action.value
       break

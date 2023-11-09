@@ -26,6 +26,7 @@ const IncomeInput: React.FC = () => {
   }
 
   const handleInputIncome = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length === 6) return
     const getValue = parseFloat(e.target.value) || 0
     dispatch({ type: 'INCOME', value: getValue })
   }

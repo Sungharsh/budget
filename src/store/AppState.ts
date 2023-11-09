@@ -20,29 +20,28 @@ export const AppState = {
     carFinancePayment: 0,
     otherLendingRepayment: 0,
   },
+  HealthAndWellbeing: {
+    gym: 0,
+    healthInsurance: 0,
+    lifeInsurance: 0,
+    treatments: 0,
+  },
+  Transport: {
+    carInsurance: 0,
+    carMaintenance: 0,
+    publicTransport: 0,
+    parking: 0,
+  },
+  Entertainment: {
+    internetTVandMobile: 0,
+    subscriptions: 0,
+    hobbies: 0,
+    outingsGoingOut: 0,
+  },
+  Other: {
+    anyOtherExpenses: 0,
+  },
   HandleFlipPage: {
     flipPage: true,
   },
-  //FUTURE ADDITIONS
-  // HealthAndWellbeing: {
-  //   gym: 0,
-  //   healthInsurance: 0,
-  //   lifeInsurance: 0,
-  //   treatments: 0,
-  // },
-  // Transport: {
-  //   carInsurance: 0,
-  //   carMaintenance: 0,
-  //   publicTransport: 0,
-  //   parking: 0,
-  // },
-  // Entertainment: {
-  //   internetTVandMobile: 0,
-  //   subscriptions: 0,
-  //   hobbies: 0,
-  //   outingsGoingOut: 0,
-  // },
-  // Other: {
-  //   anyOtherExpenses: 0,
-  // },
 }

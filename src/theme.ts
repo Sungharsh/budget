@@ -3,7 +3,7 @@ import { createTheme } from '@mui/material/styles'
 
 const theme = createTheme({
   typography: {
-    fontSize: 14,
+    fontSize: 16,
     h2: {
       fontSize: '26px',
       fontWeight: 600,
