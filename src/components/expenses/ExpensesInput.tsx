@@ -4,7 +4,12 @@ import React from 'react'
 
 import SelectFrequency from '../../utils/selectFrequency'
 import { useIncomeExpenses } from '../context/IncomeExpensesContext'
-import { ExpensesInputProps } from './ExpensesTypes'
+import { ContextKeyType } from './ExpensesTypes'
+
+interface ExpensesInputProps {
+  label: string
+  contextKey: ContextKeyType
+}
 
 const ExpensesInput: React.FC<ExpensesInputProps> = ({ label, contextKey }) => {
   const { state, dispatch } = useIncomeExpenses()
@@ -16,7 +21,6 @@ const ExpensesInput: React.FC<ExpensesInputProps> = ({ label, contextKey }) => {
   const { gym, healthInsurance, lifeInsurance, treatments } = HealthAndWellbeing
   const { carInsurance, carMaintenance, parking, publicTransport } = Transport
   const { hobbies, internetTVandMobile, outingsGoingOut, subscriptions } = Entertainment
-
   const { anyOtherExpenses } = Other
 
   const expensesValue =
