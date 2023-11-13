@@ -44,4 +44,7 @@ export const AppState = {
   HandleFlipPage: {
     flipPage: true,
   },
+  HandleGetResults: {
+    getResult: false,
+  },
 }

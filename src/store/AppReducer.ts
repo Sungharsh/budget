@@ -114,6 +114,10 @@ export const AppReducer: Reducer<IncomeExpensesStateType, Action> = (state: type
       state.HandleFlipPage.flipPage = action.value
       break
     }
+    case 'GET_RESULTS': {
+      state.HandleGetResults.getResult = action.value
+      break
+    }
     default:
       throw Error('Unknown action' + action)
   }

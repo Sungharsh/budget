@@ -44,6 +44,9 @@ export interface IncomeExpensesStateType {
   HandleFlipPage: {
     flipPage: boolean
   }
+  HandleGetResults: {
+    getResult: boolean
+  }
 }
 
 export type Action =
@@ -155,3 +158,4 @@ export type Action =
       type: 'FLIP_PAGE'
       value: boolean
     }
+  | { type: 'GET_RESULTS'; value: boolean }

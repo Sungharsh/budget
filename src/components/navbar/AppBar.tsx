@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography'
 const MenuBar: React.FC = () => {
   const theme = useTheme()
   return (
-    <AppBar position="static" sx={{ backgroundColor: theme.palette.info.main }}>
+    <AppBar position="static" sx={{ backgroundColor: theme.palette.info.main }} data-testid="menu-bar">
       <Container maxWidth="md" sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(2, 1fr)', m: 'auto', p: 4 }}>
         <Toolbar variant="dense" disableGutters>
           <Avatar sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }} />

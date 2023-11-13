@@ -36,11 +36,11 @@ const TotalIncomeExpDisplay: React.FC = () => {
       >
         <Typography variant="h6" component="h2" sx={{ color: secondaryColor }}>
           Monthly income: <br />
-          {`£ ${Math.floor(Income.salary)}`}
+          {`£${Math.floor(Income.salary)}`}
         </Typography>
         <Typography variant="h6" component="h2" sx={{ color: secondaryColor }}>
           Monthly expenses: <br />
-          {`£ ${Math.floor(totalExpenses)}`}
+          {`£${Math.floor(totalExpenses)}`}
         </Typography>
       </Box>
     </>

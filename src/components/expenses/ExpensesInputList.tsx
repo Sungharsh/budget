@@ -68,6 +68,12 @@ const ExpensesInputList: React.FC = () => {
     dispatch({ type: 'FLIP_PAGE', value })
   }
 
+  const handleGetResuts = () => {
+    const getResut = state.HandleGetResults.getResult
+    const value = !getResut
+    dispatch({ type: 'GET_RESULTS', value })
+  }
+
   return (
     <>
       <Box
@@ -106,7 +112,7 @@ const ExpensesInputList: React.FC = () => {
         <Button variant="outlined" size="large" onClick={handleFlipPage} sx={{ mr: 4, pl: 2 }}>
           Previous
         </Button>
-        <Button variant="contained" size="large">
+        <Button variant="contained" size="large" onClick={handleGetResuts}>
           Check Results
         </Button>
       </Box>
