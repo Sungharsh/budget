@@ -15,11 +15,18 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "rootDir": "src",
+    "baseUrl": "src",
     "noImplicitAny": true,
     "noUnusedLocals": false,
-    "noUnusedParameters": false
+    "noUnusedParameters": false,
+    "paths": {
+      "transpilePackages": ["@mui/xcharts"],
+      "@mui/styled-engine": ["./node_modules/@mui/x-charts"],
+      "@mui/x-charts": ["./packages/x-charts/src"],
+      "@mui/x-charts/*": ["./packages/x-charts/src/*"]
+    }
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "baseUrl": "src",
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.js", "src/**/*.jsx"],
   "exclude": ["node_modules"]
 }

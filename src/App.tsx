@@ -11,7 +11,7 @@ const App: React.FC = () => {
       <IncomeExpensesContextProvider>
         <MenuBar />
         <Main />
-        <Divider sx={{ mt: 6 }} />
+        <Divider sx={{ mt: 6 }} data-testid="divider" />
       </IncomeExpensesContextProvider>
     </>
   )
