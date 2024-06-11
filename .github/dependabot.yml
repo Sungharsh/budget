@@ -1,0 +1,30 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+    open-pull-requests-limit: 10
+    versioning-strategy: "increase"
+    ignore:
+      - dependency-name: "react-scripts"
+        versions: ["5.0.1"]
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+    open-pull-requests-limit: 10
+    versioning-strategy: "increase"
+    development: true
+    # Optionally ignore certain dependencies (for example, if you want to maintain them manually)
+    ignore:
+      - dependency-name: "eslint"
+        versions: ["8.51.0"]
+      - dependency-name: "prettier"
+        versions: ["3.0.3"]
